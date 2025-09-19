@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: ghcr.io/${GHCR_USER}/backend:latest
+    image: ghcr.io/${GHCR_USER}/friends-backend:latest
     container_name: spring_backend
     environment:
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
@@ -18,7 +18,7 @@ services:
       - app-network
 
   frontend:
-    image: ghcr.io/YOUR_GITHUB_USERNAME/frontend:latest
+    image: ghcr.io/${GHCR_USER}/friends-frontend:latest
     container_name: vue_frontend
     expose:
       - "80"
