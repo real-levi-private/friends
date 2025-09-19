@@ -5,8 +5,8 @@ on:
     branches:
       - master
     paths:
-      - 'tanks-backend/**'
-      - 'tanks-frontend/**'
+      - 'friends-backend/**'
+      - 'friends-frontend/**'
       - '.github/workflows/**'
 
 jobs:
@@ -18,8 +18,8 @@ jobs:
 
     env:
       REGISTRY: ghcr.io
-      IMAGE_BACKEND: ghcr.io/${{ github.repository_owner }}/tanks-backend
-      IMAGE_FRONTEND: ghcr.io/${{ github.repository_owner }}/tanks-frontend
+      IMAGE_BACKEND: ghcr.io/${{ github.repository_owner }}/friends-backend
+      IMAGE_FRONTEND: ghcr.io/${{ github.repository_owner }}/friends-frontend
 
     steps:
       - name: Checkout code
@@ -34,10 +34,10 @@ jobs:
 
       - name: Build backend Docker image
         run: |
-          docker build -t $IMAGE_BACKEND:latest ./tanks-backend
+          docker build -t $IMAGE_BACKEND:latest ./friends-backend
           docker push $IMAGE_BACKEND:latest
 
       - name: Build frontend Docker image
         run: |
-          docker build -t $IMAGE_FRONTEND:latest ./tanks-frontend
+          docker build -t $IMAGE_FRONTEND:latest ./friends-frontend
           docker push $IMAGE_FRONTEND:latest
