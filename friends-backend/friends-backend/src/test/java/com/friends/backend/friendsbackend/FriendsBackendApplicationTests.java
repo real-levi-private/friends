@@ -1,4 +1,4 @@
-package com.friends.backend.friends_backend;
+package com.friends.backend.friendsbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

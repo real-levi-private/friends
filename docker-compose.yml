@@ -9,7 +9,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     expose:
-      - "8080"
+      - "8081"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     depends_on:
@@ -21,7 +21,7 @@ services:
     image: ghcr.io/${GHCR_USER}/friends-frontend:latest
     container_name: vue_frontend
     expose:
-      - "80"
+      - "8080"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     depends_on:

@@ -25,3 +25,4 @@ replay_pid*
 
 friends-frontend.iml
 .env
+package-lock.json

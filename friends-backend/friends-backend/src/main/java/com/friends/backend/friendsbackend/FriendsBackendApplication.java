@@ -1,4 +1,4 @@
-package com.friends.backend.friends_backend;
+package com.friends.backend.friendsbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

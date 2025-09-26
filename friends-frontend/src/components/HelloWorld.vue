@@ -5,6 +5,7 @@ defineProps({
     required: true,
   },
 })
+import CounterButton from './CounterButton.vue';
 </script>
 
 <template>
@@ -13,6 +14,7 @@ defineProps({
     <h3>
       You’ve successfully created a project
     </h3>
+    <CounterButton />
   </div>
 </template>
 
