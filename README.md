@@ -1,7 +1,7 @@
 ## 1. Run Developer mode with local Front and Backend
 ###  1.1 Run docker compose 
 
-```bash {cmd=true}
+```bash
 docker compose -f docker-compose-front-and-backend-dev.yml up
 ```
 
@@ -10,7 +10,7 @@ docker compose -f docker-compose-front-and-backend-dev.yml up
 
 make sure .env in friends-backend/friends-backend is correctly setup
 
-```bash {cmd=true}
+```bash
 cd friends-backend/friends-backend
 export $(grep -v '^#' .env | xargs)   # Linux/macOS
 ./mvnw spring-boot:run
@@ -18,7 +18,7 @@ export $(grep -v '^#' .env | xargs)   # Linux/macOS
 
 ### 1.3 Run Frontend Locally
 
-```bash {cmd=true}
+```bash
 cd friends-frontend
 npm install
 npm run serve
@@ -27,6 +27,6 @@ npm run serve
 ## 2. Run Full Docker Compose version
 ### 2.1 Run docker compose 
 
-```bash {cmd=true}
+```bash
 docker compose up
 ```
