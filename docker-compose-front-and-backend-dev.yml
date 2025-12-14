@@ -1,32 +1,57 @@
 services:
-  db:
-    image: postgres:15
-    container_name: postgres_db
-    restart: always
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    networks:
-      - app-network
+    db:
+        image: postgres:15
+        container_name: postgres_db
+        restart: always
+        environment:
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - app-network
 
-  reverse-proxy:
-    image: nginx:stable-alpine
-    container_name: nginx_proxy
-    volumes:
-      - ./nginx/nginx-dev.conf:/etc/nginx/nginx-dev.conf:ro
-    ports:
-      - "80:80"
-    networks:
-      - app-network
+    keycloak:
+        image: quay.io/keycloak/keycloak:25.0.0
+        container_name: keycloak
+        command: start-dev
+        environment:
+            KC_DB: postgres
+            KC_DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+            KC_DB_USERNAME: ${POSTGRES_USER}
+            KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+            KC_HOSTNAME_URL: https://localhost/auth
+            KC_HOSTNAME_PATH: /auth
+            KC_HOSTNAME_STRICT: false
+            KC_HOSTNAME_STRICT_HTTPS: false
+            KC_PROXY: edge
+            KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
+            KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
+        ports:
+            - "8082:8080"
+        depends_on:
+            - db
+        networks:
+            - app-network
+
+    reverse-proxy:
+        image: nginx:stable-alpine
+        container_name: nginx_proxy
+        volumes:
+            - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf:ro
+            - ./nginx/certs:/etc/nginx/certs:ro
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app-network
 
 volumes:
-  postgres_data:
+    postgres_data:
 
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge
